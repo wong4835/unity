@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     Rigidbody rigid;
     Animator anim;
 
+    GameObject nearObject;
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -94,5 +95,20 @@ public class Player : MonoBehaviour
             anim.SetBool("isJump", false);
             isJump = false;
         }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Weapon")
+            nearObject = other.gameObject;
+
+        Debug.Log(nearObject.name);
+          
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Weapon")
+            nearObject = null;
     }
 }
